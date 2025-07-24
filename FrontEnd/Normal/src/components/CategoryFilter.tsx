@@ -3,13 +3,13 @@ import { Home, Building, TreePine, Waves, Mountain, Castle, Tent, Car } from 'lu
 import { useLanguage } from './LanguageContext';
 
 const categories = [
-  { id: 'all', name: { fr: 'Tout', ar: 'الكل' }, icon: Home },
-  { id: 'apartments', name: { fr: 'Appartements', ar: 'شقق' }, icon: Building },
-  { id: 'villas', name: { fr: 'Villas', ar: 'فيلات' }, icon: Castle },
-  { id: 'nature', name: { fr: 'Nature', ar: 'طبيعة' }, icon: TreePine },
-  { id: 'beach', name: { fr: 'Plage', ar: 'شاطئ' }, icon: Waves },
-  { id: 'mountain', name: { fr: 'Montagne', ar: 'جبل' }, icon: Mountain },
-  { id: 'camping', name: { fr: 'Camping', ar: 'تخييم' }, icon: Tent },
+  { id: 'all', name: { fr: 'Tout', ar: 'الكل', en: 'All' }, icon: Home },
+  { id: 'apartments', name: { fr: 'Appartements', ar: 'شقق', en: 'Apartments' }, icon: Building },
+  { id: 'villas', name: { fr: 'Villas', ar: 'فيلات', en: 'Villas' }, icon: Castle },
+  { id: 'nature', name: { fr: 'Nature', ar: 'طبيعة', en: 'Nature' }, icon: TreePine },
+  { id: 'beach', name: { fr: 'Plage', ar: 'شاطئ', en: 'Beach' }, icon: Waves },
+  { id: 'mountain', name: { fr: 'Montagne', ar: 'جبل', en: 'Mountain' }, icon: Mountain },
+  { id: 'camping', name: { fr: 'Camping', ar: 'تخييم', en: 'Camping' }, icon: Tent },
 ];
 
 interface CategoryFilterProps {

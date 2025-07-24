@@ -46,6 +46,28 @@ const featuresTexts = {
         description: 'فريقنا متاح لمساعدتك على مدار الساعة.'
       }
     ]
+  },
+  en: {
+    sectionTitle: 'Why choose Easy Comfort?',
+    sectionSubtitle: 'We are committed to offering you the best travel experience in Algeria',
+    features: [
+      {
+        title: 'Guaranteed security',
+        description: 'All our accommodations are verified and our hosts certified for your safety.'
+      },
+      {
+        title: 'Instant booking',
+        description: 'Book in a few clicks and receive immediate confirmation.'
+      },
+      {
+        title: 'Premium quality',
+        description: 'Accommodations selected for their quality and exceptional comfort.'
+      },
+      {
+        title: '24/7 Support',
+        description: 'Our team is available 24/7 to assist you.'
+      }
+    ]
   }
 };
 

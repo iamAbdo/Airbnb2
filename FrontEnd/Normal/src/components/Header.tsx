@@ -24,7 +24,7 @@ const Header = () => {
     }
   }, [darkMode]);
 
-  // Texts for both languages
+  // Texts for all languages
   const texts = {
     fr: {
       searchPlaceholder: 'Où souhaitez-vous aller?',
@@ -45,6 +45,16 @@ const Header = () => {
       login: 'تسجيل الدخول',
       offerHome: 'اعرض منزلك',
       help: 'مساعدة',
+    },
+    en: {
+      searchPlaceholder: 'Where do you want to go?',
+      dates: 'Dates',
+      guests: 'Guests',
+      becomeHost: 'Become a host',
+      signup: 'Sign up',
+      login: 'Log in',
+      offerHome: 'List your property',
+      help: 'Help',
     },
   };
 
@@ -144,7 +154,7 @@ const Header = () => {
                 aria-label="Toggle language selector"
               >
                 <Globe className="w-4 h-4 mr-1" />
-                <span className="text-xs">{language === 'fr' ? 'FR' : 'AR'}</span>
+                <span className="text-xs">{language === 'fr' ? 'FR' : language === 'ar' ? 'AR' : 'EN'}</span>
               </button>
               {isLangOpen && (
                 <div id="lang-dropdown" className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
@@ -159,6 +169,12 @@ const Header = () => {
                     onClick={() => { setLanguage('ar'); setIsLangOpen(false); }}
                   >
                     العربية
+                  </button>
+                  <button
+                    className={`block w-full text-left px-4 py-2 text-sm ${language === 'en' ? 'font-bold' : ''}`}
+                    onClick={() => { setLanguage('en'); setIsLangOpen(false); }}
+                  >
+                    English
                   </button>
                 </div>
               )}

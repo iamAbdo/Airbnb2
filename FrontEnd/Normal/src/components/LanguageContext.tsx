@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define the type for language
-export type Language = 'fr' | 'ar';
+export type Language = 'fr' | 'ar' | 'en';
 
 // Define the context shape
 interface LanguageContextType {

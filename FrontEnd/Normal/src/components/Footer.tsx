@@ -38,6 +38,24 @@ const texts = {
     copyright: '© 2024 Easy Comfort. جميع الحقوق محفوظة.',
     privacy: 'سياسة الخصوصية',
     legal: 'إشعارات قانونية',
+  },
+  en: {
+    companyDesc: 'Discover Algeria differently with Easy Comfort. Unique accommodations for unforgettable stays.',
+    quickLinks: 'Quick Links',
+    about: 'About',
+    howItWorks: 'How it works',
+    becomeHost: 'Become a host',
+    help: 'Help',
+    terms: 'Terms of use',
+    destinations: 'Popular destinations',
+    cities: ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Tlemcen'],
+    contact: 'Contact',
+    address: 'Algiers, Algeria',
+    phone: '+213 XX XX XX XX',
+    email: 'contact@easycomfort.dz',
+    copyright: '© 2024 Easy Comfort. All rights reserved.',
+    privacy: 'Privacy Policy',
+    legal: 'Legal Notice',
   }
 };
 

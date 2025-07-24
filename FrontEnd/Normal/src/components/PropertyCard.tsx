@@ -24,6 +24,10 @@ const texts = {
     available: 'متاح',
     perNight: '/ الليلة',
   },
+  en: {
+    available: 'Available',
+    perNight: '/ night',
+  },
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({

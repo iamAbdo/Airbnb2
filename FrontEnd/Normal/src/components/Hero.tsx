@@ -14,9 +14,15 @@ const texts = {
     desc: 'إقامات فريدة وتجارب أصيلة في جميع أنحاء الجزائر',
     start: 'ابدأ الاستكشاف',
   },
+  en: {
+    discover: 'Discover Algeria',
+    with: 'with Easy Comfort',
+    desc: 'Unique accommodations, authentic experiences throughout Algeria',
+    start: 'Start exploring',
+  },
 };
 
-const Hero = () => {
+const Hero = ({ onStart }: { onStart?: () => void }) => {
   const { language } = useLanguage();
   const isArabic = language === 'ar';
   return (
@@ -31,7 +37,7 @@ const Hero = () => {
           <p className="text-xl md:text-2xl mb-8 text-white/90 dark:text-gray-200">
             {texts[language].desc}
           </p>
-          <button className="bg-white text-red-500 font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-lg dark:bg-gray-900 dark:text-yellow-300 dark:hover:bg-gray-800">
+          <button className="bg-white text-red-500 font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-lg dark:bg-gray-900 dark:text-yellow-300 dark:hover:bg-gray-800" onClick={onStart}>
             {texts[language].start}
           </button>
         </div>

@@ -22,6 +22,16 @@ const texts = {
     passwordPlaceholder: 'كلمة المرور',
     fakeAlert: 'تمت المحاكاة!',
   },
+  en: {
+    title: 'Log in',
+    email: 'Email address',
+    password: 'Password',
+    fillAll: 'Please fill in all fields.',
+    login: 'Log in',
+    emailPlaceholder: 'Email address',
+    passwordPlaceholder: 'Password',
+    fakeAlert: 'Simulated login!',
+  },
 };
 
 const Connexion = () => {
