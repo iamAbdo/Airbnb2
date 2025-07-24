@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Menu, User, Globe } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import Switch from './Switch';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -127,21 +128,9 @@ const Header = () => {
           {/* Right Menu */}
           <div className="flex items-center space-x-4">
             {/* Dark mode toggle */}
-            <button
-              className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors duration-200 flex items-center dark:text-yellow-300 dark:hover:bg-gray-700"
-              onClick={() => setDarkMode((prev) => !prev)}
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-4.136 2.664-7.64 6.418-9.09a.75.75 0 01.908.911A7.501 7.501 0 0019.5 15.75a.75.75 0 01.911.908c-.225.79-.52 1.548-.841 2.344a.75.75 0 01-1.318.001z" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5m0 15V21m8.485-8.485h-1.5m-15 0H3m15.364-6.364l-1.06 1.06m-12.728 0l-1.06-1.06m12.728 12.728l-1.06-1.06m-12.728 0l-1.06 1.06M12 7.5A4.5 4.5 0 1112 16.5a4.5 4.5 0 010-9z" />
-                </svg>
-              )}
-            </button>
+            <div className="flex items-center">
+              <Switch checked={darkMode} onChange={() => setDarkMode((prev) => !prev)} />
+            </div>
             <button className="hidden md:block text-sm font-medium text-gray-700 hover:text-gray-900 px-3 py-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
               {texts[language].becomeHost}
             </button>
