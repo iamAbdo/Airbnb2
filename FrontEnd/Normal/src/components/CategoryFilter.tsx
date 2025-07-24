@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Home, Building, TreePine, Waves, Mountain, Castle, Tent, Car } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 const categories = [
-  { id: 'all', name: 'Tout', icon: Home },
-  { id: 'apartments', name: 'Appartements', icon: Building },
-  { id: 'villas', name: 'Villas', icon: Castle },
-  { id: 'nature', name: 'Nature', icon: TreePine },
-  { id: 'beach', name: 'Plage', icon: Waves },
-  { id: 'mountain', name: 'Montagne', icon: Mountain },
-  { id: 'camping', name: 'Camping', icon: Tent },
-  { id: 'transport', name: 'Transport', icon: Car },
+  { id: 'all', name: { fr: 'Tout', ar: 'الكل' }, icon: Home },
+  { id: 'apartments', name: { fr: 'Appartements', ar: 'شقق' }, icon: Building },
+  { id: 'villas', name: { fr: 'Villas', ar: 'فيلات' }, icon: Castle },
+  { id: 'nature', name: { fr: 'Nature', ar: 'طبيعة' }, icon: TreePine },
+  { id: 'beach', name: { fr: 'Plage', ar: 'شاطئ' }, icon: Waves },
+  { id: 'mountain', name: { fr: 'Montagne', ar: 'جبل' }, icon: Mountain },
+  { id: 'camping', name: { fr: 'Camping', ar: 'تخييم' }, icon: Tent },
 ];
 
-const CategoryFilter = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
+interface CategoryFilterProps {
+  activeCategory: string;
+  setActiveCategory: (category: string) => void;
+}
 
+const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeCategory, setActiveCategory }) => {
+  const { language } = useLanguage();
+  const isArabic = language === 'ar';
   return (
-    <div className="border-b border-gray-200 bg-white sticky top-16 z-40">
+    <div className="border-b border-gray-200 bg-white sticky top-16 z-40" dir={isArabic ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-8 py-4 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center space-x-8 py-4  overflow-x-auto scrollbar-hide">
           {categories.map((category) => {
             const Icon = category.icon;
             return (
@@ -32,7 +37,7 @@ const CategoryFilter = () => {
                 }`}
               >
                 <Icon className="w-6 h-6" />
-                <span className="text-xs font-medium whitespace-nowrap">{category.name}</span>
+                <span className="text-xs font-medium whitespace-nowrap">{category.name[language]}</span>
               </button>
             );
           })}
