@@ -21,7 +21,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeCategory, setActi
   const { language } = useLanguage();
   const isArabic = language === 'ar';
   return (
-    <div className="border-b border-gray-200 bg-white sticky top-16 z-40" dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="border-b border-gray-200 bg-white sticky top-16 z-40 dark:bg-gray-900 dark:border-gray-700" dir={isArabic ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center space-x-8 py-4  overflow-x-auto scrollbar-hide">
           {categories.map((category) => {
@@ -32,8 +32,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeCategory, setActi
                 onClick={() => setActiveCategory(category.id)}
                 className={`flex flex-col items-center space-y-2 min-w-max px-3 py-2 rounded-lg transition-colors duration-200 ${
                   activeCategory === category.id
-                    ? 'text-red-500 border-b-2 border-red-500'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    ? 'text-red-500 border-b-2 border-red-500 dark:text-yellow-300 dark:border-yellow-300'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-yellow-300 dark:hover:bg-gray-800'
                 }`}
               >
                 <Icon className="w-6 h-6" />

@@ -6,7 +6,7 @@ import CategoryFilter from './components/CategoryFilter';
 import PropertyGrid from './components/PropertyGrid';
 import Features from './components/Features';
 import Footer from './components/Footer';
-import Connexion from './components/Connexion';
+import Connexion from './components/Connexion.tsx';
 import { LanguageProvider } from './components/LanguageContext';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   return (
     <LanguageProvider>
       <Router>
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
           <Header />
           <Routes>
             <Route path="/" element={

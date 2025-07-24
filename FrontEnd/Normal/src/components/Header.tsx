@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Menu, User, Globe } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const isArabic = language === 'ar';
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
 
   // Texts for both languages
   const texts = {
@@ -31,8 +48,31 @@ const Header = () => {
     },
   };
 
+  // Hide language selector when menu is opened
+  useEffect(() => {
+    if (isMenuOpen) setIsLangOpen(false);
+  }, [isMenuOpen]);
+
+  // Hide language selector on click outside
+  useEffect(() => {
+    if (!isLangOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      const langBtn = document.getElementById('lang-btn');
+      const langDropdown = document.getElementById('lang-dropdown');
+      if (
+        langBtn && langDropdown &&
+        !langBtn.contains(e.target as Node) &&
+        !langDropdown.contains(e.target as Node)
+      ) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [isLangOpen]);
+
   return (
-    <header className={`sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm${isArabic ? ' rtl' : ''}`} dir={isArabic ? 'rtl' : 'ltr'}>
+    <header className={`sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm${isArabic ? ' rtl' : ''} dark:bg-gray-900 dark:border-gray-700 dark:shadow-md`} dir={isArabic ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -76,36 +116,56 @@ const Header = () => {
 
           {/* Right Menu */}
           <div className="flex items-center space-x-4">
+            {/* Dark mode toggle */}
+            <button
+              className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors duration-200 flex items-center dark:text-yellow-300 dark:hover:bg-gray-700"
+              onClick={() => setDarkMode((prev) => !prev)}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-4.136 2.664-7.64 6.418-9.09a.75.75 0 01.908.911A7.501 7.501 0 0019.5 15.75a.75.75 0 01.911.908c-.225.79-.52 1.548-.841 2.344a.75.75 0 01-1.318.001z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5m0 15V21m8.485-8.485h-1.5m-15 0H3m15.364-6.364l-1.06 1.06m-12.728 0l-1.06-1.06m12.728 12.728l-1.06-1.06m-12.728 0l-1.06 1.06M12 7.5A4.5 4.5 0 1112 16.5a4.5 4.5 0 010-9z" />
+                </svg>
+              )}
+            </button>
             <button className="hidden md:block text-sm font-medium text-gray-700 hover:text-gray-900 px-3 py-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
               {texts[language].becomeHost}
             </button>
             {/* Language Switcher */}
             <div className="relative">
               <button
+                id="lang-btn"
                 className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors duration-200 flex items-center"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIsLangOpen((prev) => !prev)}
+                aria-label="Toggle language selector"
               >
                 <Globe className="w-4 h-4 mr-1" />
                 <span className="text-xs">{language === 'fr' ? 'FR' : 'AR'}</span>
               </button>
-              <div className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-                <button
-                  className={`block w-full text-left px-4 py-2 text-sm ${language === 'fr' ? 'font-bold' : ''}`}
-                  onClick={() => setLanguage('fr')}
-                >
-                  Français
-                </button>
-                <button
-                  className={`block w-full text-left px-4 py-2 text-sm ${language === 'ar' ? 'font-bold' : ''}`}
-                  onClick={() => setLanguage('ar')}
-                >
-                  العربية
-                </button>
-              </div>
+              {isLangOpen && (
+                <div id="lang-dropdown" className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+                  <button
+                    className={`block w-full text-left px-4 py-2 text-sm ${language === 'fr' ? 'font-bold' : ''}`}
+                    onClick={() => { setLanguage('fr'); setIsLangOpen(false); }}
+                  >
+                    Français
+                  </button>
+                  <button
+                    className={`block w-full text-left px-4 py-2 text-sm ${language === 'ar' ? 'font-bold' : ''}`}
+                    onClick={() => { setLanguage('ar'); setIsLangOpen(false); }}
+                  >
+                    العربية
+                  </button>
+                </div>
+              )}
             </div>
             <div className="relative">
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => { setIsMenuOpen(!isMenuOpen); setIsLangOpen(false); }}
                 className="flex items-center space-x-2 border border-gray-300 rounded-full px-3 py-2 hover:shadow-md transition-shadow duration-200"
               >
                 <Menu className="w-4 h-4 text-gray-700" />

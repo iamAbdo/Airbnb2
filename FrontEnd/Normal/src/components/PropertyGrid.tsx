@@ -137,7 +137,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ activeCategory }) => {
   }, [properties, activeCategory, language]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-gray-900" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProperties.map((property) => (
           <PropertyCard key={property.id} {...{
@@ -150,7 +150,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ activeCategory }) => {
         ))}
       </div>
       <div className="flex justify-center mt-12">
-        <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium">
+        <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-400">
           {texts[language].seeMore}
         </button>
       </div>
